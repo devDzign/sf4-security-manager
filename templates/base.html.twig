@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+
+    {{ encore_entry_link_tags('app') }}
+    <title>
+        {% block title %}
+            Welcome!
+        {% endblock %}
+    </title>
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+
+{% set currentRoute = app.request.get('_route') %}
+{% set user = app.user %}
+
+
+{% include 'partials/header.html.twig' %}
+<div class="container mt-5">
+    {% block body %}
+    {% endblock %}
+</div>
+{% include 'partials/footer.html.twig' %}
+{{ encore_entry_script_tags('app') }}
+{% block javascripts %}{% endblock %}
+</body>
 </html>
