@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Furniture index{% endblock %}
+
+{% block body %}
+    <h1>Creation d'article</h1>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content }}</td>
+                <td>
+                    {% if article.imageName %}
+                        <img src="{{ vich_uploader_asset(article, 'imageFile') }}" class="img-fluid" height="150" width="150">
+                    {% endif %}
+
+                </td>
+                <td>
+
+
+                    <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-success">
+                        <i class="fa fa-eye"></i>show
+                    </a>
+                    <hr>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-dark">
+                        <i class="fa fa-edit"></i>edit
+                    </a>
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_new') }}" class="btn btn-outline-success"><i class="fa fa-hacker-news"></i> Create new</a>
+{% endblock %}

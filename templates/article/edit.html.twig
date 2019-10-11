@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifie le meuble{% endblock %}
+
+{% block body %}
+    <h1>Modifie l'article</h1>
+
+    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('article_index') }}">back to list</a>
+
+    {#    {{ include('furniture/_delete_form.html.twig') }}#}
+{% endblock %}

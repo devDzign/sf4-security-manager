@@ -40,7 +40,12 @@ class UserFixture extends AppFixtures
                 $user = new User();
                 $user->setEmail(sprintf('user%d@test.com', $i));
                 $user->setFirstName($this->faker->firstName);
-                $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
+                $user->setPassword(
+                    $this->passwordEncoder->encodePassword(
+                        $user,
+                        'admin'
+                    )
+                );
 
                 return $user;
             }
