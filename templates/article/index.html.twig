@@ -23,7 +23,10 @@
                 <td>{{ article.content }}</td>
                 <td>
                     {% if article.imageName %}
-                        <img src="{{ vich_uploader_asset(article, 'imageFile') }}" class="img-fluid" height="150" width="150">
+                        <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('squared_thumbnail_small') }}" class="img-fluid">
+                    {% else %}
+                        <img src="{{ asset('build/img/empty.jpg') | imagine_filter('squared_thumbnail_small') }}">
+
                     {% endif %}
 
                 </td>

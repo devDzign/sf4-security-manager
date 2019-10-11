@@ -5,7 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -40,7 +42,9 @@ class Article
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
-     *
+     * @Assert\Image(
+     *     mimeTypes="image/jpeg"
+     * )
      * @var File
      */
     private $imageFile;
@@ -99,7 +103,7 @@ class Article
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getImageName(): ?string
     {
@@ -111,7 +115,7 @@ class Article
      *
      * @return Article
      */
-    public function setImageName(string $imageName): Article
+    public function setImageName(string $imageName = null): Article
     {
         $this->imageName = $imageName;
 
