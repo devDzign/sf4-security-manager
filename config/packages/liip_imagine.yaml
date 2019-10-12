@@ -12,6 +12,14 @@ liip_imagine:
           mode:          outbound
           allow_upscale: true
 
+
+    squared_thumbnail_icon_profile:
+      filters:
+        thumbnail:
+          size:          [30, 30]
+          mode:          outbound
+          allow_upscale: true
+
     squared_thumbnail_medium:
       filters:
         thumbnail:

@@ -36,7 +36,6 @@ class UserFixture extends AppFixtures
             10,
             'main_users',
             function ($i) {
-
                 $user = new User();
                 $user->setEmail(sprintf('user%d@test.com', $i));
                 $user->setFirstName($this->faker->firstName);
@@ -48,6 +47,26 @@ class UserFixture extends AppFixtures
                 );
 
                 return $user;
+            }
+        );
+
+        $this->createMany(
+            3,
+            'admin_users',
+            function ($i) {
+                $user = new User();
+                $user->setEmail(sprintf('admin%d@test.com', $i));
+                $user->setFirstName($this->faker->firstName);
+                $user->setRoles(['ROLE_ADMIN']);
+                $user->setPassword(
+                    $this->passwordEncoder->encodePassword(
+                        $user,
+                        'admin'
+                    )
+                );
+
+                return $user;
+
             }
         );
 
