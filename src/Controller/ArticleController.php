@@ -48,7 +48,6 @@ class ArticleController extends AbstractController
         if ( $form->isSubmitted() && $form->isValid() ) {
 
             $entityManager = $this->getDoctrine()->getManager();
-            $article->setUser($this->getUser());
             $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success', 'Le article a bien été créé !');

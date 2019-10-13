@@ -57,7 +57,10 @@ class ArticleType extends AppType
                     'widget' => 'single_text',
                 ]
             )
-            ->add('user', UserSelectTextType::class)
+            ->add(
+                'user',
+                UserSelectTextType::class
+            )
 //            ->add(
 //                'user',
 //                EntityType::class,
