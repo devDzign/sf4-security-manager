@@ -12,6 +12,7 @@
             <th>Titre</th>
             <th>Contenu</th>
             <th>Image</th>
+            <th>Published?</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -29,6 +30,9 @@
 
                     {% endif %}
 
+                </td>
+                <td>
+                    <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }}"></span>
                 </td>
                 <td>
 

@@ -61,6 +61,11 @@ class Article
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $publishedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -163,6 +168,26 @@ class Article
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->publishedAt !== null;
     }
 
 
