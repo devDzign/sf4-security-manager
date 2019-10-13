@@ -25,7 +25,12 @@ class UserSelectTextType extends AppType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer(new EmailToUserTransformer($this->userRepository));
+        $builder->addModelTransformer(
+            new EmailToUserTransformer(
+                $this->userRepository,
+                $options['finder_callback']
+            )
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -33,6 +38,12 @@ class UserSelectTextType extends AppType
         return $resolver->setDefaults(
             [
                 'invalid_message' => ' Hmmm..., user not found!!',
+                'finder_callback' => static function (UserRepository $userRepository, string $email) {
+                    return $userRepository->findOneBy(['email' => $email]);
+                },
+                'attr'            => [
+                    'class' => 'js-user-autocomplete',
+                ],
             ]
         );
     }
