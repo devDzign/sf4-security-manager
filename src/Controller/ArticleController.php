@@ -37,9 +37,12 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
-     * @param Request $request
+     * @param Request         $request
+     *
+     * @param SlackBotService $slackBot
      *
      * @return Response
+     * @throws \Http\Client\Exception
      */
     public function new(Request $request, SlackBotService $slackBot): Response
     {
@@ -59,7 +62,7 @@ class ArticleController extends AbstractController
             $this->addFlash('success', 'Le article a bien été créé !');
 
 
-            $slackBot->sendMessageSlack('Clement', ':heart:', 'Je suis Clement');
+            $slackBot->sendMessageSlack('Clement', 'Je suis Clement', ':heart:');
 
             return $this->redirectToRoute('article_index');
         }

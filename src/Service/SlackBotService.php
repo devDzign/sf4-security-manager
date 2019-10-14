@@ -28,16 +28,16 @@ class SlackBotService
 
     /**
      * @param string $name
-     * @param string $icone
+     * @param string $icon
      * @param string $content
      *
      * @return Message
      * @throws Exception
      */
-    public function sendMessageSlack(string $name, string $icone = ':ghost:', string $content): Message
+    public function sendMessageSlack(string $name, string $content, string $icon = ':ghost:'): Message
     {
 
-        $this->createMessage($name, $icone, $content);
+        $this->createMessage($name, $content, $icon);
         $this->send();
 
         return $this->message;
@@ -45,12 +45,12 @@ class SlackBotService
 
     /**
      * @param string $name
-     * @param string $icone
+     * @param string $icon
      * @param string $content
      *
      * @return Message
      */
-    private function createMessage(string $name, string $icon = ':ghost:', string $content)
+    private function createMessage(string $name, string $content, string $icon = ':ghost:'): Message
     {
         $this->message = $this->slack->createMessage()
             ->from($name)
@@ -65,7 +65,6 @@ class SlackBotService
      */
     private function send(): void
     {
-
         $this->slack->sendMessage($this->message);
     }
 

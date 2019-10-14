@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Service\SlackBotService;
-use Nexy\Slack\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +18,7 @@ class SecurityController extends AbstractController
      * @Route("/login", name="account_login")
      * @param AuthenticationUtils $authenticationUtils
      *
-     * @param Client              $slack
+     * @param SlackBotService     $slackBot
      *
      * @return Response
      * @throws \Http\Client\Exception
@@ -32,7 +31,8 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
 
-        $slackBot->sendMessageSlack('Khan', ':100:', 'Salut les amis je suis le bot :smile:');
+        //$this->dispatchMessage(new SlackMessage('Khan',  'Super sa marche :smile:', ':100:'));
+        $slackBot->sendMessageSlack('Khan', 'Salut les amis je suis le bot :smile:', ':100:');
 
 
         return $this->render(
