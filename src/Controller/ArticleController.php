@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Service\SlackBotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,8 +41,12 @@ class ArticleController extends AbstractController
      *
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, SlackBotService $slackBot): Response
     {
+
+        /** @var User $user */
+        $user = $this->getUser();
+
         $article = new Article();
         $form    = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -51,6 +57,9 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success', 'Le article a bien été créé !');
+
+
+            $slackBot->sendMessageSlack('Clement', ':heart:', 'Je suis Clement');
 
             return $this->redirectToRoute('article_index');
         }
