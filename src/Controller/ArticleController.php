@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Form\ArticleType;
+use App\Messenger\Message\SlackMessage;
 use App\Repository\ArticleRepository;
 use App\Service\SlackBotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -86,6 +89,13 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article): Response
     {
+        $message  = new SlackMessage('Create', 'Creation un nouveau article :poop:', ':poop:');
+        $envelope = new Envelope(
+            $message, [
+            new DelayStamp(5000),
+        ]
+        );
+        $this->dispatchMessage($envelope);
         return $this->render(
             'article/show.html.twig',
             [

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Messenger\Message\SlackMessage;
 use App\Service\SlackBotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +32,7 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
 
-        //$this->dispatchMessage(new SlackMessage('Khan',  'Super sa marche :smile:', ':100:'));
-        $slackBot->sendMessageSlack('Khan', 'Salut les amis je suis le bot :smile:', ':100:');
+        $this->dispatchMessage(new SlackMessage('Khan', 'Super sa marche :smile:', ':100:'));
 
 
         return $this->render(
